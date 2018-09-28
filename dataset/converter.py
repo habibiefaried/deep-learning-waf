@@ -6,7 +6,7 @@ import random
 
 def countfeature(str, isattack):
 	#if is attack is 0, then it's normal
-	input_features = [0] * 37
+	input_features = [0] * 36
 	pattern = re.compile("^[a-zA-Z0-9]+$")
 
 	#~ ! @ # $ % ^ & * ( ) _ + { } | : " < > ? ` - = [ ] \ ; ', . / <<<SPACE>>>
@@ -81,10 +81,11 @@ def countfeature(str, isattack):
 			input_features[33] += 1
 		else: #For chars outside alphabet and symbol
 			input_features[34] += 1  
-		input_features[35] += 1 #counting length
 
 	if (isattack):
-		input_features[36] = 1
+		input_features[35] = 1
+
+	input_features.insert(0, str.strip())
 	return input_features
 
 lists = []
@@ -93,9 +94,7 @@ for line in open('normal_string'):
 
 for line in open('attack_string'):
 	lists.append(countfeature(line, True))
-
-random.shuffle(lists)
-
+	
 with open("dataset.csv", "wb") as f:
 	writer = csv.writer(f)
 	writer.writerows(lists)
