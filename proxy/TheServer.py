@@ -4,7 +4,8 @@ import time
 import sys
 
 from Forward import Forward
-from Analyze import Analyze
+from HTTPRequest import HTTPRequest
+from pprint import pprint
 
 class TheServer:
     input_list = []
@@ -61,8 +62,8 @@ class TheServer:
     def on_recv(self):
         data = self.data
         if (self.channel[self.s].getpeername()[0] == self.forward_to[0]):
-
-            A = Analyze(data)
-            A.analyze()
-
+            request = HTTPRequest(self.data)
+            content = self.data.split("\r\n\r\n")[1]
+            if (request.command == "POST"):
+                pprint(vars(request))
         self.channel[self.s].send(data)
