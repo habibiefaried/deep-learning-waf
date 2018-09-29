@@ -1,14 +1,26 @@
 import string
 from random import *
-min_char = 10
-max_char = 1000
+min_char = 1
+max_char = 200
 
-for i in range(1,5000):
-	allchar = string.ascii_letters + string.punctuation + " " + "_" + string.digits
+#word
+for i in range(1,1500):
+	allchar = string.ascii_letters
+	print "".join(choice(allchar) for x in range(randint(min_char, max_char)))
+
+#filename
+for i in range(1,1500):
+	allchar = string.ascii_letters
+	a =  "".join(choice(allchar) for x in range(randint(min_char, max_char)))
+	a =  a + ".".join(choice(allchar) for x in range(randint(1, 3)))
+
+#sentence
+for i in range(1,3000):
+	allchar = string.ascii_letters + "!" + " " + "_" + string.digits
 	print "".join(choice(allchar) for x in range(randint(min_char, max_char)))
 
 #IP atau domain
-for i in range(1,1000):
+for i in range(1,1500):
 	allchar = string.ascii_letters
 	alldigit = string.digits
 	print "".join(choice(allchar) for x in range(4)) + "." + "".join(choice(allchar) for x in range(4)) + "." + "".join(choice(allchar) for x in range(4)) + "." + "".join(choice(allchar) for x in range(4)) 
